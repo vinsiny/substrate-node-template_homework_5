@@ -47,7 +47,11 @@ pub use sp_runtime::{Perbill, Permill};
 
 /// Import the template pallet.
 pub use pallet_template;
-
+pub use pallet_poe;
+impl pallet_poe::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type MaxClaimLength = ConstU32<512>;
+}
 /// An index to a block.
 pub type BlockNumber = u32;
 
@@ -293,6 +297,7 @@ construct_runtime!(
 		Sudo: pallet_sudo,
 		// Include the custom logic from the pallet-template in the runtime.
 		TemplateModule: pallet_template,
+		PoeModule: pallet_poe,
 	}
 );
 
